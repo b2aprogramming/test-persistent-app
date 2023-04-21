@@ -1,0 +1,50 @@
+<ng-container [ngSwitch]="type" class="input-controller {{cssClass ? cssClass : ''}}">
+      <ng-container *ngIf="type === 'text' || type === 'password'">
+        <div class="block-100 input-field-wrapper">
+          <input [type]="type" [disabled]="disabled" [readonly]="readonly" (blur)="blurInput()" (focus)="focusInput()" (change)="changeInput()" [(ngModel)]="value" [class.has-value]="value && value.length" class="form-control {{inputClass}}" >
+        </div>
+      </ng-container>
+      <ng-container *ngSwitchCase="'number'">
+        <div class="block-100 input-field-wrapper">
+          <input type="tel" [maxlength]="maxLength" (blur)="blurInput()" (focus)="focusInput()" (change)="changeInput()" [appAllowedCharacters]="numberPat" [notAllowedCharacters]="notNumberPat" (blur)="blurInput()" [(ngModel)]="value" [class.has-value]="value && value.length" class="form-control {{inputClass}}" (keyUp)="changeNumberValue($event)">
+        </div>
+      </ng-container>
+
+      <ng-container *ngSwitchCase="'textarea'">
+        <div class="block-100 input-field-wrapper p-t-16">
+          <textarea [(ngModel)]="value" [rows]="textAreaRows" [cols]="textAreaCols" class="form-control {{'has-'+ textareaFocusBlurText}}" [readonly]="readonly" (focus)="onTextAreaFocus()" (blur)="onTextAreaBlur()" [class.has-value]="value && value.length"  (blur)="blurInput()" (change)="changeInput()"></textarea>
+        </div>
+      </ng-container>
+      <ng-container *ngSwitchCase="'phone'">
+        <div class="block-100 input-field-wrapper {{type}}">
+          <input [maxlength]="14" [appAllowedCharacters]="phoneFormat" [notAllowedCharacters]="noPhoneFormat" appPhoneNumberAutoPopulate (change)="changePhoneNumber(value)" type="text" (blur)="blurInput()" [(ngModel)]="value" [class.has-value]="value && value.length" class="form-control {{inputClass}}">
+        </div>
+      </ng-container>
+
+      <ng-container *ngSwitchCase="'select'">
+        <div class="block-100">
+          <select class="select-box" #selectBox [compareWith]="compareWith" [(ngModel)]="value"  [class.has-value]="value" (blur)="blurInput()" (focus)="focusInput()" (change)="changeInput()">
+            <option value="null">--Select--</option>
+            <option *ngFor="let select of selectData" [value]="select">{{labelKey ? select[labelKey] : select}}</option>
+          </select>
+      </div>
+      </ng-container>
+
+      <ng-container *ngSwitchCase="'radio'">
+        <div class="block-100 input-field-wrapper">
+          <label *ngFor="let radio of selectData">
+            <input type="radio" [name]="name" [value]="idKey ? radio[idKey] : radio" [(ngModel)]="value"> <span>{{labelKey ? radio[labelKey] : radio}}</span>
+          </label>
+        </div>
+      </ng-container>
+
+      <ng-container *ngSwitchCase="'checkbox'">
+        <div class="block-100 input-field-wrapper">
+          <label>
+            <input type="checkbox" [(ngModel)]="value"> <span>{{labelName}}</span>
+          </label>
+        </div>
+      </ng-container>
+
+
+</ng-container>

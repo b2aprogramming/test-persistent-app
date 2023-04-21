@@ -1,0 +1,79 @@
+[
+    {
+        "type":"text",
+        "title":"What is you name?",
+        "id":1,
+        "required": "Name is required"
+     },
+     {
+        "type":"text",
+        "id":2,
+        "title":"What is you Email?",
+        "required": "Email is required",
+        "pattern": "^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\\.[a-zA-Z0-9-]+)*$",
+        "patternMessage": "Email is not valid"
+     },
+     {
+        "type":"phone",
+        "id":3,
+        "title":"What is you Mobile number?",
+        "required":"Mobile number is required",
+        "pattern": "^[\\+]?[(]?[0-9]{3}[)]?[-\\s\\.]?[0-9]{3}[-\\s\\.]?[0-9]{4}$",
+        "patternMessage": "Phone number is not valid"
+     },
+     {
+        "type":"textarea",
+        "id":4,
+        "title":"What is your address?",
+        "required": "Addres is required",
+        "minlength": 50
+     },
+     {
+        "type":"select",
+        "id":5,
+        "title":"What is your State?",
+        "required": "State is required",
+        "choices": [
+            {
+                "label": "Telengana",
+                "value": "telengana"
+            },
+            {
+                "label": "Andhrapradesh",
+                "value": "andhrapradesh"
+            }
+        ]
+     },
+     {
+        "type":"radio",
+        "id":6,
+        "title":"What is your Gender?",
+        "required": "Gender is required",
+        "choices": [
+            {
+                "label": "Male",
+                "value": "male"
+            },
+            {
+                "label": "Female",
+                "value": "female"
+            }
+        ]
+     },
+     {
+        "type":"checkbox",
+        "id":7,
+        "title":"What is your Hobbies?",
+        "required": "At least one hobby is required",
+        "choices": [
+            {
+                "label": "Chess",
+                "value": "chess"
+            },
+            {
+                "label": "Caram",
+                "value": "female"
+            }
+        ]
+     }
+]

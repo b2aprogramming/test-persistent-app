@@ -1,0 +1,50 @@
+<div class="question-container">
+  <h1>Questions</h1>
+  <form [formGroup]="questionForm" (ngSubmit)="submitQuestionAnswers()"  #formQuestion="ngForm" >
+    <div formArrayName="questions">
+      <div *ngFor="let question of questionData; let ind = index" [formGroupName]="ind" class="questin-block">
+        <div class="question-label-block">{{question.title}}</div>
+        <div class="question-field-block">
+        <ng-container *ngIf="question.type !== 'checkbox'">
+          <app-form-field
+            formControlName="answer"
+            [selectData]="question?.choices || []"
+            idKey="value"
+            labelKey="label"
+            name="gendar"
+            [textAreaCols]="40"
+            [type]="question.type"
+            >
+          </app-form-field>
+          <div class="from-errors" *ngIf="questionForm?.get('questions')?.get(''+ind)?.get('answer')?.errors && formQuestion.submitted">
+            <div *ngIf="questionForm?.get('questions')?.get(''+ind)?.get('answer')?.errors?.['required']">{{question.required}}</div>
+            <div *ngIf="questionForm?.get('questions')?.get(''+ind)?.get('answer')?.errors?.['customPattern']">{{question.patternMessage}}</div>
+          </div>
+        </ng-container>
+        <ng-container *ngIf="question.type == 'checkbox'">
+          <div formGroupName="answer">
+            <div *ngFor="let checkbox of question.choices; let cInd = index " [formGroupName]="cInd">
+              <div>
+                <app-form-field
+                formControlName="answer"
+                [type]="question.type"
+                [labelName]="checkbox.label"
+                >
+              </app-form-field>
+              </div>
+          </div>
+          <div class="from-errors" *ngIf="questionForm?.get('questions')?.get(''+ind)?.get('answer')?.errors && formQuestion.submitted">
+            <div *ngIf="questionForm?.get('questions')?.get(''+ind)?.get('answer')?.errors?.['checkBox']">{{question.required}}</div>
+
+          </div>
+          </div>
+        </ng-container>
+      </div>
+      </div>
+      <div class="btn-block">
+        <button type="submit">Submit</button>
+      </div>
+    </div>
+
+  </form>
+</div>

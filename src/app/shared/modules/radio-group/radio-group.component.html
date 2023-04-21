@@ -1,0 +1,5 @@
+<div>
+  <label *ngFor="let radio of data">
+    <input type="radio" [name]="name" [value]="radioId ? radio[radioId] : radio" [(ngModel)]="value"> <span>{{radioLabel ? radio[radioLabel] : radio}}</span>
+  </label>
+</div>
